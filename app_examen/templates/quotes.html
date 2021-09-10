@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block titulo %}Quote Dashboard{% endblock %}
+
+{% block contenido %}
+
+<div class="container">
+<div class="row">
+
+<div class="col">
+<h3>Welcolme {{request.session.usuario.name}} {{request.session.usuario.last_name}}</h2>
+
+<h2>Quotes</h2>
+<div class="">
+  {% for quote in quotes %}
+  <figure class="text-center border border-5">
+    <blockquote class="blockquote">
+      <p>{{quote.q_cont}}</p>
+    </blockquote>
+    <figcaption class="blockquote-footer">
+      {{quote.autor}}<cite title="Source Title"></cite>
+    </figcaption>
+    <p>Posted By <a href="/user/{{quote.creador.id}}/">{{quote.creador.name}} {{quote.creador.last_name}}</a></p>
+    <p>Cantidad likes: {{quote.like.count}} - <a href="/add_like/{{quote.id}}/">Like</a></p>
+      {%if quote.creador.id == request.session.usuario.id %}
+      <a href="/add_like/{{quote.id}}/">Delete</a>
+      {% endif %}
+
+  </figure>
+  {% endfor %}
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="col">
+<a class="row justify-content-end" href="/edit_account/{{request.session.usuario.id}}">Edit My Account</a>
+ <h2> Add a Quote!</h2>
+ <form method="POST" action="/add_quote">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="nombre" class="form-label"><u><strong>Author</strong></u></label>
+    <textarea  class="form-control" rows= "1" id="autor" name="autor"></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="last_name" class="form-label"><u><strong>Quote</strong></u></label>
+    <textarea class="form-control" rows= "3" cols= "100" id="quote_text" name="quote_text"></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit Quote</button>
+</form>
+
+</div>
+
+
+
+
+</div>
+
+
+
+</div>
+{% endblock %}
+
+{% block libreria %}
+
+
+{% endblock %}

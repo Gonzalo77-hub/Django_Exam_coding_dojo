@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block titulo %} Edit Usuario {% endblock %}
+
+{% block contenido %}
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-5 border border-3 py-4 bg-warning bg-gradient">
+      <h1><Strong>Editar Campos</strong></h1>
+      <form method="POST" action="/myaccount/{{account.id}}/">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="edit_name" class="form-label"><u><strong>Name</strong></u></label>
+          <input type="text" class="form-control" id="name" name="edit_name" value="{{account.name}}">
+        </div>
+        <div class="mb-3">
+          <label for="edit_last_name" class="form-label"><u><strong>Last Name</strong></u></label>
+          <input type="text" class="form-control" id="name" name="edit_last_name" value="{{account.last_name}}">
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label"><u><strong>Email</strong></u></label>
+          <input type="text" class="form-control" id="email" name="edit_email" value="{{account.email}}">
+        </div>
+        <input type="hidden" name="role" value="user">
+
+
+        <button type="submit" class="btn btn-primary">Editar</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block libreria %}
+
+
+{% endblock %}
